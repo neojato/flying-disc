@@ -4,8 +4,8 @@
 (function() {
   'use strict';
 
-  var app = angular.module('devfest', ['ionic', 'firebase', 'ngOpenFB'])
-    .run(function($ionicPlatform, ngFB) {
+  var app = angular.module('devfest', ['ionic', 'firebase'])
+    .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
         // Override the default HTML alert with native dialog - requires the cordova dialogs plugin
         if (navigator.notification) {
@@ -29,9 +29,6 @@
           // org.apache.cordova.statusbar required
           StatusBar.styleLightContent(); //status bar will have white text and icons
         }
-
-        // Facebook integration - Register your app and get your App ID from http://developer.facebook.com
-        ngFB.init({appId: 'your-app-id'});
       });
     })
 

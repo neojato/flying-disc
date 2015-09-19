@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  var appCtrl = function($scope, $ionicModal, $ionicLoading, $timeout, FacebookService, TwitterService, LinkedInService) {
+  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $timeout, Config, AuthService, TwitterService) {
     $scope.date = new Date();
 
     // Init the login modal
@@ -15,7 +15,7 @@
     .then(function(modal) {
       $scope.modal = modal;
       // Now that modal is ready, let's have them login first
-      $scope.login();
+      $scope.loginModal();
     });
 
     $scope.closeLogin = function() {
@@ -23,101 +23,46 @@
     };
 
     // Open the login modal
-    $scope.login = function() {
+    $scope.loginModal = function() {
       $scope.loginData = {};
       $scope.loginMsg = '';
       if ($scope.modal != undefined)
         $scope.modal.show();
     };
 
-    // Basic Login Handling - invoke a check for userid and pw being valued but nothing beyond a message
-  //  $scope.doLogin = function() {
-  //    if ($scope.loginData.username!=undefined && $scope.loginData.password!=undefined) {
-  //      // Simulate authentication check - roll your own here instead of success timeout :)
-  //      $timeout(function() {
-  //        $scope.closeLogin();
-  //      }, 1000);
-  //      $scope.loginMsg = "Login successful!";
-  //      $scope.login.result = true;
-  //    } else {
-  //      $scope.loginMsg = "Please enter a valid username and password.";
-  //      $scope.login.result = false;
-  //    }
-  //  };
-
-    // Facebook Login (actual Facebook login, have to use your FB credentials)
-    $scope.fbLogin = function() {
-      FacebookService.login(rspCallback);
-      function rspCallback(response) {
-        if (response.status === 'connected') {
-          $scope.loginMsg = "Facebook login succeeded!";
-          $scope.login.result = true;
-          $scope.closeLogin();
-          // Could add code to check if on profile page and swap out user with logged in one...
-        } else {
-          $scope.loginMsg="Facebook login failed";
-          $scope.login.result=false;
-        }
+    // Firebase social login (Facebook, Twitter, GitHub, Google+)
+    $scope.login = function(authMethod) {
+      AuthService.$authWithOAuthRedirect(authMethod)
+        .then(function(authData) {
+          // user successfully logged in
+        })
+        .catch(function(error) {
+          if (error.code === 'TRANSPORT_UNAVAILABLE') {
+            AuthService.$authWithOAuthPopup(authMethod)
+              .then(function(authData) {
+                // user successfully logged in using pop-up method
+              })
+          } else {
+            console.log(error);
+          }
+      });
+    };
+    
+    AuthService.$onAuth(function(authData) {
+      if (authData === null) {
+        console.log('Not logged in yet');
+//        $scope.modal.show();
+      } else {
+//        console.log(authData);
+        $scope.modal.hide();
       }
-    };
-
-    // Twitter Login
-    $scope.twLogin = function() {
-      TwitterService.connectTwitter().then(function () {
-        if (TwitterService.isReady()) {
-          $scope.loginMsg = 'Twitter login succeeded!';
-          $scope.login.result = true;
-          $scope.closeLogin();
-        }
-      });
-    };
-
-    // LinkedIn Login
-    $scope.liLogin = function(event) {
-      LinkedInService.initialize();
-      LinkedInService.connectLinkedin().then(function () {
-        if (LinkedInService.isReady()) {
-          $scope.loginMsg = 'LinkedIn login succeeded!';
-          $scope.login.result = true;
-          $scope.closeLogin();
-        }
-      });
-    };
+      $rootScope.authData = authData;
+    });
 
     // Logout
     $scope.logout = function() {
-      var fbConnected = false;
-      FacebookService.getStatus(function (result) {
-        if (result.status == 'connected')
-          fbConnected = true;
-      })
-
-      // If Twitter Logged in
-      if (TwitterService.isReady()) {
-        //sign out clears the OAuth cache, the user will have to reauthenticate when returning
-        TwitterService.clearCache();
-        $scope.user = null;
-        $scope.msg = 'Twitter logout success!';
-      }
-
-      else if (LinkedInService.isReady()) {
-        //sign out clears the OAuth cache, the user will have to reauthenticate when returning
-        LinkedInService.clearCache();
-        $scope.user = null;
-        $scope.msg = 'LinkedIn logout success!';
-      }
-
-      else if (fbConnected) {
-        FacebookService.logout(function(rsp){
-          $scope.user = null;
-          $scope.msg = 'Facebook logout success!';
-        });
-      }
-
-      else {
-        $scope.msg = 'Logout success!';
-      }
-      showToast($scope.msg);
+      AuthService.$unauth();
+      showToast('Logout success!');
     };
 
     function showToast(message) {
@@ -130,5 +75,5 @@
   };
 
   var app = angular.module('devfest')
-    .controller('AppCtrl', ['$scope', '$ionicModal', '$ionicLoading', '$timeout', 'FacebookService', 'TwitterService', 'LinkedInService', appCtrl]);
+    .controller('AppCtrl', ['$rootScope', '$scope', '$ionicModal', '$ionicLoading', '$timeout', 'Config', 'AuthService', 'TwitterService', appCtrl]);
 }())
