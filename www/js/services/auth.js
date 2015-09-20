@@ -1,12 +1,11 @@
 (function() {
   'use strict';
   
-  var auth = function($firebaseAuth) {
-    // Firebase integration - Register your app and get your App ID from https://www.firebase.com
-    var usersRef = new Firebase('https://flying-disc.firebaseio.com/users');
+  var auth = function($firebaseAuth, firebase_root) {
+    var usersRef = new Firebase(firebase_root + '/users');
     return $firebaseAuth(usersRef);
   };
 
   var app = angular.module('devfest')
-    .factory('AuthService', ['$firebaseAuth', auth]);
+    .factory('AuthService', ['$firebaseAuth', 'firebase_root', auth]);
 }())
