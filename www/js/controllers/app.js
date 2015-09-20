@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $timeout, Config, AuthService, TwitterService) {
+  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $timeout, $state, Config, AuthService) {
     $scope.date = new Date();
 
     // Init the login modal
@@ -35,12 +35,16 @@
       AuthService.$authWithOAuthRedirect(authMethod)
         .then(function(authData) {
           // user successfully logged in
+          showToast('Logged in!');
+          $state.go('app.sessions');
         })
         .catch(function(error) {
           if (error.code === 'TRANSPORT_UNAVAILABLE') {
             AuthService.$authWithOAuthPopup(authMethod)
               .then(function(authData) {
                 // user successfully logged in using pop-up method
+                showToast('Successfully Logged in!');
+                $state.go('app.sessions');
               })
           } else {
             console.log(error);
@@ -50,11 +54,12 @@
     
     AuthService.$onAuth(function(authData) {
       if (authData === null) {
-        console.log('Not logged in yet');
-//        $scope.modal.show();
+        if ($scope.modal != undefined)
+          $scope.modal.show();
       } else {
-//        console.log(authData);
-        $scope.modal.hide();
+        console.log(authData);
+        if ($scope.modal != undefined)
+          $scope.modal.hide();
       }
       $rootScope.authData = authData;
     });
@@ -63,6 +68,7 @@
     $scope.logout = function() {
       AuthService.$unauth();
       showToast('Logout success!');
+      $state.go('app.sessions');
     };
 
     function showToast(message) {
@@ -75,5 +81,5 @@
   };
 
   var app = angular.module('devfest')
-    .controller('AppCtrl', ['$rootScope', '$scope', '$ionicModal', '$ionicLoading', '$timeout', 'Config', 'AuthService', 'TwitterService', appCtrl]);
+    .controller('AppCtrl', ['$rootScope', '$scope', '$ionicModal', '$ionicLoading', '$timeout', '$state', 'Config', 'AuthService', appCtrl]);
 }())

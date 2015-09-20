@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  var sessionCtrl = function($scope, $stateParams, $q, $ionicLoading, $timeout, SessionService, FavoriteService, TwitterService, FacebookService) {
+  var sessionCtrl = function($scope, $stateParams, $q, $ionicLoading, $timeout, Config, SessionService, FavoriteService) {
     $scope.favorites = FavoriteService.favorites;
     $scope.session = SessionService.$getRecord($stateParams.sessionId);
     
@@ -12,19 +12,26 @@
         $scope.session.isFave = true;
     });
 
-    $scope.share = function(session) {
-      if (window.sessionStorage.fbtoken != undefined) {
-        FacebookService.postFacebook(session);
+    $scope.share = function() {
+      if (window.plugins && window.plugins.socialsharing) {
+        window.plugins.socialsharing.share(
+          'I\'ll be attending the session: ' + $scope.session.title + '.',
+          Config.eventTitle, null, Config.eventURL,
+          function() {
+            console.log('Success')
+          },
+          function (error) {
+            console.log('Share fail ' + error)
+          });
       } else {
-        alert('You must first login with Facebook to use this feature.');
+        console.log('Share plugin not available');
       }
     };
 
     $scope.follow = function() {
       var screenname = $scope.session.twitter_id;
-      if (TwitterService.isReady()) {
-        TwitterService.follow(screenname).then(function (data) {
-          console.log('Speaker has ' + data.followers_count + ' followers')
+      if ($scope.authData.twitter) {
+        TwitterService.follow($scope.authData.twitter, screenname).then(function (data) {
           showToast('You are now following ' + screenname + ' (current follower count ' + data.followers_count + ')');
         });
       } else {
@@ -35,7 +42,7 @@
     $scope.addFavorite = function() {
       var currentSession = $scope.session;
       if (!currentSession.isFave) {
-        FavoriteService.addFave(currentSession,successCB,errorCB);
+        FavoriteService.addFave(currentSession, successCB, errorCB);
       } else {
         currentSession.isFave = false;
         FavoriteService.removeFave(currentSession);
@@ -43,7 +50,7 @@
     };
 
     function errorCB() { showToast('Session was already added.') }
-    function successCB(session) { showToast('Session added to favorites!'); session.isFave = true; }
+    function successCB(session) { showToast('Added to favorites!'); session.isFave = true; }
 
     function showToast(message) {
       if (window.plugins && window.plugins.toast) {
@@ -65,7 +72,7 @@
 
         window.plugins.calendar.createEvent($scope.session.title, $scope.session.room, $scope.session.description, startDate, endDate,
           function () {
-            alert($scope.session.title + ' has been added to your calendar.');
+            showToast($scope.session.title + ' has been added to your calendar.');
           },
           function (error) {
             console.log('Calendar fail ' + error);
@@ -75,24 +82,8 @@
         console.log('Calendar plugin not available.');
       }
     };
-
-    $scope.shareNative = function() {
-      if (window.plugins && window.plugins.socialsharing) {
-        window.plugins.socialsharing.share(
-          'I\'ll be attending the session: ' + $scope.session.title + '.',
-          'DevFest KC 2015', null, 'http://devfest.gdgkc.org',
-          function() {
-            console.log('Success')
-          },
-          function (error) {
-            console.log('Share fail ' + error)
-          });
-      } else {
-        console.log('Share plugin not available');
-      }
-    };
   };
 
   var app = angular.module('devfest')
-    .controller('SessionCtrl', ['$scope', '$stateParams', '$q', '$ionicLoading', '$timeout', 'SessionService', 'FavoriteService', 'TwitterService', 'FacebookService', sessionCtrl]);
+    .controller('SessionCtrl', ['$scope', '$stateParams', '$q', '$ionicLoading', '$timeout', 'Config', 'SessionService', 'FavoriteService', sessionCtrl]);
 }())

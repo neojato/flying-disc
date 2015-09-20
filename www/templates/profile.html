@@ -4,13 +4,44 @@
   </ion-nav-buttons>
 
   <ion-content class="has-header">
-    <div class="list card">
+    <!-- Google+ -->
+    <div ng-if="authData.google" class="list card">
       <div class="item stable-bg">
-        <h2>{{user.name}}</h2>
-        <p>{{user.email}}</p>
+        <h2 class="icon-left ion-social-googleplus">&nbsp;{{authData.google.displayName}}</h2>
+        <p>{{authData.google.email}}</p>
       </div>
       <div class="item item-body">
-        <img class="pic" ng-src="{{user.pic}}"/>
+        <img class="pic" ng-src="{{authData.google.profileImageURL}}"/>
+      </div>
+    </div>
+    <!-- Facebook -->
+    <div ng-if="authData.facebook" class="list card">
+      <div class="item stable-bg">
+        <h2 class="icon-left ion-social-facebook">&nbsp;{{authData.facebook.displayName}}</h2>
+        <p>{{authData.facebook.email}}</p>
+      </div>
+      <div class="item item-body">
+        <img class="pic" ng-src="{{authData.facebook.profileImageURL}}"/>
+      </div>
+    </div>
+    <!-- Twitter -->
+    <div ng-if="authData.twitter" class="list card">
+      <div class="item stable-bg">
+        <h2 class="icon-left ion-social-twitter">&nbsp;{{authData.twitter.displayName}}</h2>
+        <p>@{{authData.twitter.username}}</p>
+      </div>
+      <div class="item item-body">
+        <img class="pic" ng-src="{{authData.twitter.cachedUserProfile.profile_image_url_https}}"/>
+      </div>
+    </div>
+    <!-- GitHub -->
+    <div ng-if="authData.github" class="list card">
+      <div class="item stable-bg">
+        <h2 class="icon-left ion-social-github">&nbsp;{{authData.github.displayName}}</h2>
+        <p>{{authData.github.username}}</p>
+      </div>
+      <div class="item item-body">
+        <img class="pic" ng-src="{{authData.github.cachedUserProfile.avatar_url}}"/>
       </div>
     </div>
   </ion-content>
