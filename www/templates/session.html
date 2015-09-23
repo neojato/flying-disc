@@ -7,11 +7,7 @@
           <p>{{session.speaker|uppercase}}</p>
         </div>
 
-        <p>{{session.room}} | {{session.time}}
-          <a class="tab-item addCal" ng-click="addToCalendar()">
-          <i class="icon ion-calendar" style="font-size: 16px">
-            Add</i></a></button>
-        </p>
+        <p>{{session.room}} | {{session.time}}</p>
       </div>
       <div class="item item-body">
         <p>{{session.description}}</p>
@@ -20,6 +16,10 @@
         <a class="tab-item" ng-click="addFavorite()">
           <i class="icon ion-heart" ng-class="{'fave': session.isFave}"></i>
           Favorite
+        </a>
+        <a class="tab-item" ng-click="addToCalendar()">
+          <i class="icon ion-calendar"></i>
+          Add
         </a>
         <a class="tab-item" ng-click="share()">
           <i class="icon ion-share"></i>
