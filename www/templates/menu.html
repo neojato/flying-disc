@@ -7,15 +7,15 @@
   </ion-pane>
 
   <ion-side-menu side="left">
-    <header class="bar bar-header bar-dark">
-      <h1 class="title">DevFest {{date | date:'yyyy'}}</h1>
+    <header class="topbar drawer large" ng-style="{'background-image':'url(/img/' + authData.provider + '.png)'}">
+      <img class="gravatar depth z1" src="{{getPicture(authData)}}">
+      <div class="username">
+        <strong>{{getName(authData) || authData.provider}}</strong>
+        <br>{{(authData.provider === 'twitter' ? '@' + getHandle(authData) : getHandle(authData)) || ''}}
+      </div>
     </header>
-    <ion-content class="has-header">
+    <ion-content class="nav-header">
       <ion-list>
-        <ion-item class="item-icon-left" nav-clear menu-close ng-click="loginModal()">
-            <i class="icon ion-log-in"></i>
-          Login
-        </ion-item>
         <ion-item class="item-icon-left" nav-clear menu-close href="#/app/sessions">
             <i class="icon ion-document-text"></i>
           Sessions
