@@ -36,7 +36,6 @@
       AuthService.$authWithOAuthRedirect(authMethod)
         .then(function(authData) {
           // user successfully logged in
-          showToast('Logged in!');
           $state.go('app.sessions');
         })
         .catch(function(error) {
@@ -44,7 +43,6 @@
             AuthService.$authWithOAuthPopup(authMethod)
               .then(function(authData) {
                 // user successfully logged in using pop-up method
-                showToast('Successfully Logged in!');
                 $state.go('app.sessions');
               })
           } else {
@@ -58,8 +56,8 @@
         if ($scope.modal != undefined)
           $scope.modal.show();
       } else {
+        showToast('Welcome ' + $scope.getName(authData) + '!');
         checkIfUserExists(authData);
-        console.log(authData);
         if ($scope.modal != undefined)
           $scope.modal.hide();
       }
