@@ -7,29 +7,33 @@
   </ion-pane>
 
   <ion-side-menu side="left">
-    <header class="topbar drawer large" ng-style="{'background-image':'url(/img/' + authData.provider + '.png)'}">
+    <header class="topbar drawer large" ng-style="{'background-image':'url(/img/gdg_' + authData.provider + '.png)'}">
       <img class="gravatar depth z1" src="{{getPicture(authData)}}">
       <div class="username">
-        <strong>{{getName(authData) || authData.provider}}</strong>
-        <br>{{(authData.provider === 'twitter' ? '@' + getHandle(authData) : getHandle(authData)) || ''}}
+        <strong>{{eventName}}</strong>
+        <br>{{getName(authData) ? getName(authData) : (authData.provider === 'twitter' ? '@' + getHandle(authData) : getHandle(authData)) || ''}}
       </div>
     </header>
     <ion-content class="nav-header">
       <ion-list>
         <ion-item class="item-icon-left" nav-clear menu-close href="#/app/sessions">
-            <i class="icon ion-document-text"></i>
+          <i class="icon ion-document-text"></i>
           Sessions
         </ion-item>
         <ion-item class="item-icon-left" nav-clear menu-close href="#/app/favorites">
-            <i class="icon ion-heart"></i>
+          <i class="icon ion-heart"></i>
           Favorites
         </ion-item>
-        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/profile">
-            <i class="icon ion-person"></i>
+        <ion-item class="item-icon-left" nav-clear menu-close ng-click="getTicket()">
+          <i class="icon ion-code"></i>
+          Tickets
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/about">
+          <i class="icon ion-person"></i>
           Profile
         </ion-item>
         <ion-item class="item-icon-left" nav-clear menu-close ng-click="logout()">
-            <i class="icon ion-log-out"></i>
+          <i class="icon ion-log-out"></i>
           Logout
         </ion-item>
       </ion-list>
