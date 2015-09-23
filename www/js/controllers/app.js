@@ -1,8 +1,9 @@
 (function() {
   'use strict';
   
-  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $timeout, $state, Config, AuthService) {
+  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $timeout, $state, Config, AuthService, UserService) {
     $scope.date = new Date();
+    $scope.users = UserService;
 
     // Init the login modal
     $scope.loginData = {};
@@ -57,6 +58,7 @@
         if ($scope.modal != undefined)
           $scope.modal.show();
       } else {
+        checkIfUserExists(authData);
         console.log(authData);
         if ($scope.modal != undefined)
           $scope.modal.hide();
@@ -70,6 +72,97 @@
       showToast('Logout success!');
       $state.go('app.sessions');
     };
+    
+    function checkIfUserExists(data) {
+      var usersRef = UserService.$ref();
+      usersRef.once('value', function(snapshot) {
+        if (!snapshot.hasChild(data.uid)) {
+          // save user info
+          usersRef.child(data.uid).set({
+            provider: data.provider,
+            name: $scope.getName(data),
+            email: $scope.getEmail(data),
+            handle: $scope.getHandle(data),
+            link: $scope.getLink(data)
+          });
+        }
+      });
+    }
+    
+    $scope.getName = function(data) {
+      if (data) {
+        switch(data.provider) {
+          case 'google':
+            return data.google.displayName;
+          case 'facebook':
+            return data.facebook.displayName;
+          case 'twitter':
+            return data.twitter.displayName;
+          case 'github':
+            return data.github.displayName;
+        }
+      }
+    };
+    
+    $scope.getHandle = function(data) {
+      if (data) {
+        switch(data.provider) {
+          case 'google':
+            return data.google.email ? data.google.email : null;
+          case 'facebook':
+            return data.facebook.email ? data.facebook.email : null;
+          case 'twitter':
+            return data.twitter.username;
+          case 'github':
+            return data.github.username;
+        }
+      }
+    };
+    
+    $scope.getEmail = function(data) {
+      if (data) {
+        switch(data.provider) {
+          case 'google':
+            return data.google.email ? data.google.email : null;
+          case 'facebook':
+            return data.facebook.email ? data.facebook.email : null;
+          case 'twitter':
+            return null;
+          case 'github':
+            return data.github.cachedUserProfile.email;
+        }
+      }
+    };
+    
+    $scope.getPicture = function(data) {
+      if (data) {
+        switch(data.provider) {
+          case 'google':
+            return data.google.profileImageURL;
+          case 'facebook':
+            return data.facebook.profileImageURL;
+          case 'twitter':
+            return data.twitter.cachedUserProfile.profile_image_url_https;
+          case 'github':
+            return data.github.cachedUserProfile.avatar_url;
+        }
+      }
+    };
+    
+    $scope.getLink = function(data) {
+      if (data) {
+        switch(data.provider) {
+          case 'google':
+            return data.google.cachedUserProfile.link;
+          case 'facebook':
+            return data.facebook.cachedUserProfile.link;
+          case 'twitter':
+            return 'https://twitter.com/' + data.twitter.username;
+          case 'github':
+            return data.github.cachedUserProfile.html_url;
+        }
+      }
+    };
 
     function showToast(message) {
       if (window.plugins && window.plugins.toast) {
@@ -81,5 +174,5 @@
   };
 
   var app = angular.module('devfest')
-    .controller('AppCtrl', ['$rootScope', '$scope', '$ionicModal', '$ionicLoading', '$timeout', '$state', 'Config', 'AuthService', appCtrl]);
+    .controller('AppCtrl', ['$rootScope', '$scope', '$ionicModal', '$ionicLoading', '$timeout', '$state', 'Config', 'AuthService', 'UserService', appCtrl]);
 }())

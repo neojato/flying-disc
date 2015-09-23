@@ -2,7 +2,7 @@
   'use strict';
   
   var auth = function($firebaseAuth, firebase_root) {
-    var usersRef = new Firebase(firebase_root + '/users');
+    var usersRef = new Firebase(firebase_root);
     return $firebaseAuth(usersRef);
   };
 
