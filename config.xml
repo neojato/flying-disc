@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.trinominis.flyingdisc" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>DevFest KC 2015</name>
+  <name>DevFest KC</name>
   <description>
         Project flying-disc: A GDG DevFest hybrid app utilizing Firebase, Ionic Framework, and Cordova.
     </description>
