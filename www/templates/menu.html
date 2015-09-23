@@ -7,7 +7,8 @@
   </ion-pane>
 
   <ion-side-menu side="left">
-    <header class="topbar drawer large" ng-style="{'background-image':'url(/img/gdg_' + authData.provider + '.png)'}">
+<!-- ng-style="{'background-image':'url(/img/gdg_' + authData.provider + '.png)'}" -->
+    <header class="topbar drawer large">
       <img class="gravatar depth z1" src="{{getPicture(authData)}}">
       <div class="username">
         <strong>{{eventName}}</strong>
@@ -28,9 +29,13 @@
           <i class="icon ion-code"></i>
           Tickets
         </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/sponsors">
+          <i class="icon ion-social-usd"></i>
+          Sponsors
+        </ion-item>
         <ion-item class="item-icon-left" nav-clear menu-close href="#/app/about">
-          <i class="icon ion-person"></i>
-          Profile
+          <i class="icon icon-boomerang"></i>
+          About
         </ion-item>
         <ion-item class="item-icon-left" nav-clear menu-close ng-click="logout()">
           <i class="icon ion-log-out"></i>
