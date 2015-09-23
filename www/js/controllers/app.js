@@ -4,6 +4,7 @@
   var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $timeout, $state, Config, AuthService, UserService) {
     $scope.date = new Date();
     $scope.users = UserService;
+    $scope.eventName = Config.eventName;
 
     // Init the login modal
     $scope.loginData = {};

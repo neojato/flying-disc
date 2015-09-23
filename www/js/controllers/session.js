@@ -16,7 +16,7 @@
       if (window.plugins && window.plugins.socialsharing) {
         window.plugins.socialsharing.share(
           'I\'ll be attending the session: ' + $scope.session.title + '.',
-          Config.eventTitle, null, Config.eventURL,
+          Config.eventName, null, Config.eventURL,
           function() {
             console.log('Success')
           },
