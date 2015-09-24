@@ -1,11 +1,11 @@
 (function() {
   'use strict';
   
-  var auth = function($firebaseAuth, firebase_root) {
-    var usersRef = new Firebase(firebase_root);
+  var auth = function($firebaseAuth, furl) {
+    var usersRef = new Firebase(furl);
     return $firebaseAuth(usersRef);
   };
 
   var app = angular.module('devfest')
-    .factory('AuthService', ['$firebaseAuth', 'firebase_root', auth]);
+    .factory('AuthService', ['$firebaseAuth', 'furl', auth]);
 }())
