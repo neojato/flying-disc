@@ -45,12 +45,12 @@
         controller: 'AppCtrl'
       })
 
-      .state('app.profile', {
-        url: '/profile',
+      .state('app.about', {
+        url: '/about',
         views: {
           'menuContent': {
-            templateUrl: 'templates/profile.html',
-            controller: 'ProfileCtrl'
+            templateUrl: 'templates/about.html',
+            controller: 'AboutCtrl'
           }
         }
       })

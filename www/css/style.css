@@ -31,6 +31,12 @@
 	content: "\e600";
 }
 
+.gdg_loading {
+    background: url('../img/gdg_loading.gif') no-repeat 0 0 rgb(255, 255, 255);
+    width: 64px;
+    height: 64px;
+}
+
 .nav-header {
   top: 140px !important;
 }
@@ -102,6 +108,10 @@
 .item .name {
   white-space: normal;
   padding-left: 50px;
+}
+
+.about a {
+  color: #e42012;
 }
 
 .fave {
