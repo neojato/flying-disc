@@ -13,7 +13,7 @@
 	font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="custom icon-"], [class*="custom icon-"] {
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
