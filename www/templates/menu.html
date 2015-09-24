@@ -7,8 +7,7 @@
   </ion-pane>
 
   <ion-side-menu side="left">
-<!-- ng-style="{'background-image':'url(/img/gdg_' + authData.provider + '.png)'}" -->
-    <header class="topbar drawer large">
+    <header class="topbar drawer large" style="background-image:url(img/gdg_{{authData.provider}}.png)">
       <img class="gravatar depth z1" src="{{getPicture(authData)}}">
       <div class="username">
         <strong>{{eventName}}</strong>
