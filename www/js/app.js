@@ -4,7 +4,7 @@
 (function() {
   'use strict';
 
-  var app = angular.module('devfest', ['ionic', 'firebase'])
+  var app = angular.module('devfest', ['ionic', 'firebase', 'ngSanitize'])
     .run(function($ionicPlatform) {
       $ionicPlatform.ready(function() {
         // Override the default HTML alert with native dialog - requires the cordova dialogs plugin

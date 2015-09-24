@@ -21,7 +21,7 @@
           var user = {
             id: uid,
             name: url.label.replace(/Organizer: /g, ''),
-            link: url.value
+            url: url.value
           };
           AboutService.getImage(uid).then(function(response) {
             var str = response.config.url;
@@ -35,7 +35,7 @@
         } else {
           var link = {
             label: url.label,
-            link: url.value,
+            url: url.value,
             image: 'http://www.google.com/s2/favicons?domain=' + url.value
           };
           links.push(link);
@@ -53,6 +53,11 @@
           return imgs[i].url;
         }
       }
+    };
+    
+    $scope.openLink = function(link) {
+      window.open(link, '_system', 'location=yes');
+      return false;
     };
   };
 

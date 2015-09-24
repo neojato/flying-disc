@@ -5,30 +5,30 @@
 
   <ion-content class="has-header">
     <div class="gdg_loading" ng-show="loading"></div>
-    <div class="list card">
+    <div class="list card" ng-hide="loading">
       <div class="item item-divider">
         <h2>About</h2>
       </div>
       <div class="item item-body">
-        <p class="about" ng-bind-html="desc"></p>
+        <p class="about" ng-bind-html="desc | externalLinks"></p>
       </div>
     </div>
-    <div class="list card">
+    <div class="list card" ng-hide="loading">
       <div class="item item-divider">
         <h2>Organizers</h2>
       </div>
       <div class="item item-body">
-        <ion-item ng-repeat="org in organizers" type="item-text-wrap" class="item-avatar" href="#" onclick="window.open('{{org.link}}', '_system', 'location=yes'); return false;">
-          <img ng-src="{{getImage(org.id)}}"/>&nbsp;&nbsp;{{org.name}}
+        <ion-item ng-repeat="org in organizers" type="item-text-wrap" class="item-avatar" href="#" ng-click="openLink('{{org.url}}')">
+          <img ng-src="{{getImage(org.id)}}"/>&nbsp;&nbsp;<strong>{{org.name}}</strong><br />&nbsp;&nbsp;Organizer
         </ion-item>
       </div>
     </div>
-    <div class="list card">
+    <div class="list card" ng-hide="loading">
       <div class="item item-divider">
         <h2>Links</h2>
       </div>
       <div class="item item-body">
-        <ion-item ng-repeat="link in links" type="item-text-wrap" href="#" onclick="window.open('{{link.link}}', '_system', 'location=yes'); return false;">
+        <ion-item ng-repeat="link in links" type="item-text-wrap" href="#" ng-click="openLink('{{link.url}}')">
           <img src="{{link.image}}"/>&nbsp;&nbsp;{{link.label}}
         </ion-item>
       </div>
