@@ -1,7 +1,7 @@
-GDG DevFest KC 2015 App (Project flying-disc)
+GDG DevFest KC 2015 App
 ===========================
 
-Android/iOS application for GDG DevFest
+The flying-disc project is a template for a dynamic Android/iOS application for GDG DevFest. It pulls data from Google+ API utilizing [Firebase](https://www.firebase.com/), [Ionic Framework](http://ionic.io/), and [Cordova](https://cordova.apache.org/).
 
 Setting up the DevFest App
 -------------------------
