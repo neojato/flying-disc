@@ -1,11 +1,12 @@
 (function() {
   'use strict';
   
-  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $timeout, $state, Config, AuthService, UserService) {
+  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $timeout, $state, Config, AuthService, UserService, SponsorService) {
     $scope.date = new Date();
     $scope.users = UserService;
     $scope.eventName = Config.eventName;
     $scope.ticketURL = Config.ticketURL;
+    $scope.sponsors = SponsorService.sponsors;
 
     // Init the login modal
     $scope.loginData = {};
@@ -178,5 +179,5 @@
   };
 
   var app = angular.module('devfest')
-    .controller('AppCtrl', ['$rootScope', '$scope', '$ionicModal', '$ionicLoading', '$timeout', '$state', 'Config', 'AuthService', 'UserService', appCtrl]);
+    .controller('AppCtrl', ['$rootScope', '$scope', '$ionicModal', '$ionicLoading', '$timeout', '$state', 'Config', 'AuthService', 'UserService', 'SponsorService', appCtrl]);
 }())
