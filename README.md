@@ -8,15 +8,19 @@ Setting up the DevFest App
 1. Ensure you have [Ionic](http://ionicframework.com/getting-started/) installed (and are using the latest version)
 
 2. Create a Firebase account, create a new app, and setup [Firebase auth](https://www.firebase.com/docs/web/guide/user-auth.html) for the social logins
+    * Google+
+    * Facebook
+    * Twitter
+    * GitHub
 
 3. Create Google Cloud project for API key
 
     * Can use the same project created when setting up Google+ login in step 2
 
 4. Create a new Ionic project
-```
-ionic start devfest sidemenu
-```
+
+    `ionic start devfest sidemenu`
+
 5. Replace the **/www** folder with the **/www** folder from this project.
 
 6. Update GDG branding and Firebase project ID
