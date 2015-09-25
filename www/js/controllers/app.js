@@ -5,6 +5,7 @@
     $scope.date = new Date();
     $scope.users = UserService;
     $scope.eventName = Config.eventName;
+    $scope.ticketURL = Config.ticketURL;
 
     // Init the login modal
     $scope.loginData = {};
