@@ -9,9 +9,13 @@
       'id'            : '116015988631052616691', // Google+ profile id for the GDG
       'google_api'    : 'AIzaSyB3g3Fr3M56bILSK2aqn6arqU1CQt1zb3E', // Google API Key
       'domain'        : 'http://gdgkc.org', // GDG website, custom domain or [your-app].appspot.com
-      'eventName'     : 'DevFest KC 2015', // typically 'DevFest [year]'
+      'eventName'     : 'GDG DevFest KC', // typically 'DevFest [place]'
       'eventURL'      : 'http://devfest.gdgkc.org', // link to event website (ex. G+, Meetup, Eventbrite, etc)
-      'ticketURL'     : '', // link to where they can buy tickets
+      'ticketURL'     : '', // link to buy tickets
+      'eventDate'     : '2015-12-05', // ISO formetted YYYY-MM-DD (currently only supports 1 day DevFest)
+      'eventStart'    : '09:00:00', // start time
+      'eventEnd'      : '16:00:00', // end time
+      'sessionLength' : '2700000' // use minutes in milliseconds
     };
   };
   
