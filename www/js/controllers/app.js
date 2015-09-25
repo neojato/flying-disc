@@ -73,17 +73,23 @@
     };
     
     function checkIfUserExists(data) {
-      var usersRef = UserService.$ref();
-      usersRef.once('value', function(snapshot) {
+      var users = UserService.$ref();
+      users.once('value', function(snapshot) {
+        var user = {
+          uid: data.uid,
+          provider: data.provider,
+          name: $scope.getName(data),
+          email: $scope.getEmail(data),
+          handle: $scope.getHandle(data),
+          link: $scope.getLink(data),
+          image: $scope.getImage(data)
+        };
         if (!snapshot.hasChild(data.uid)) {
           // save user info
-          usersRef.child(data.uid).set({
-            provider: data.provider,
-            name: $scope.getName(data),
-            email: $scope.getEmail(data),
-            handle: $scope.getHandle(data),
-            link: $scope.getLink(data)
-          });
+          users.child(data.uid).set(user);
+          $rootScope.user = user;
+        } else {
+          $rootScope.user = user;
         }
       });
     }
@@ -133,7 +139,7 @@
       }
     };
     
-    $scope.getPicture = function(data) {
+    $scope.getImage = function(data) {
       if (data) {
         switch(data.provider) {
           case 'google':

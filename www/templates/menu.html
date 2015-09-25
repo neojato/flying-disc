@@ -7,11 +7,11 @@
   </ion-pane>
 
   <ion-side-menu side="left">
-    <header class="topbar drawer large" style="background-image:url(img/gdg_{{authData.provider}}.png)">
-      <img class="gravatar depth z1" src="{{getPicture(authData)}}">
+    <header class="topbar drawer large" style="background-image:url(img/gdg_{{user.provider}}.png)">
+      <img class="gravatar depth z1" ng-src="{{user.image}}">
       <div class="username">
         <strong>{{eventName}}</strong>
-        <br>{{getName(authData) ? getName(authData) : (authData.provider === 'twitter' ? '@' + getHandle(authData) : getHandle(authData)) || ''}}
+        <br>{{user.name ? user.name : (user.provider === 'twitter' ? '@' + user.handle : user.handle) || ''}}
       </div>
     </header>
     <ion-content class="nav-header">
