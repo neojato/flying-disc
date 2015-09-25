@@ -58,12 +58,10 @@
         if ($scope.modal != undefined)
           $scope.modal.show();
       } else {
-        showToast('Welcome ' + $scope.getName(authData) + '!');
         checkIfUserExists(authData);
         if ($scope.modal != undefined)
           $scope.modal.hide();
       }
-      $rootScope.authData = authData;
     });
 
     // Logout

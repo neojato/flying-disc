@@ -27,17 +27,6 @@
       }
     };
 
-    $scope.follow = function() {
-      var screenname = $scope.session.twitter_id;
-      if ($scope.authData.twitter) {
-        TwitterService.follow($scope.authData.twitter, screenname).then(function (data) {
-          showToast('You are now following ' + screenname + ' (current follower count ' + data.followers_count + ')');
-        });
-      } else {
-        alert('You must first login with Twitter to use this feature.');
-      }
-    };
-
     $scope.addFavorite = function() {
       var currentSession = $scope.session;
       if (!currentSession.isFave) {
