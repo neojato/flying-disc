@@ -30,7 +30,7 @@
         </select>
       </label>
       <ion-item ng-repeat="session in sessions | filter:search | orderBy: field" type="item-text-wrap"
-        class="item-avatar" href="#/app/sessions/{{session.$id}}"><img src="pics/{{session.pic}}"/>
+        class="item-avatar" href="#/app/sessions/{{session.$id}}"><img ng-src="{{session.image || 'img/topicIcon.png'}}"/>
         <p class="title"><strong>{{session.title}}</strong><br />{{session.speaker}}</p>
       </ion-item>
     </ion-list>
