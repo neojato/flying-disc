@@ -2,8 +2,8 @@
   'use strict';
   
   var auth = function($firebaseAuth, furl) {
-    var usersRef = new Firebase(furl);
-    return $firebaseAuth(usersRef);
+    var ref = new Firebase(furl);
+    return $firebaseAuth(ref);
   };
 
   var app = angular.module('devfest')

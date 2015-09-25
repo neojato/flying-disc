@@ -18,10 +18,10 @@
           'I\'ll be attending the session: ' + $scope.session.title + '.',
           Config.eventName, null, Config.eventURL,
           function() {
-            console.log('Success')
+            // Share success
           },
           function (error) {
-            console.log('Share fail ' + error)
+            console.log('Share failed: ' + error)
           });
       } else {
         console.log('Share plugin not available');

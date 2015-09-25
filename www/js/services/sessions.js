@@ -2,8 +2,8 @@
   'use strict';
   
   var session = function($firebaseArray, furl) {
-    var sessionRef = new Firebase(furl + '/sessions');
-    return $firebaseArray(sessionRef);
+    var ref = new Firebase(furl + '/sessions');
+    return $firebaseArray(ref);
   };
 
   var app = angular.module('devfest')

@@ -2,8 +2,8 @@
   'use strict';
   
   var user = function($firebaseArray, furl) {
-    var usersRef = new Firebase(furl + '/users');
-    return $firebaseArray(usersRef);
+    var ref = new Firebase(furl + '/users');
+    return $firebaseArray(ref);
   };
 
   var app = angular.module('devfest')
