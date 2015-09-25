@@ -30,7 +30,6 @@ Setting up the DevFest App
     * Update Firebase project ID in `/js/app.js`
 
 7. Add required plugins:
-
     * Add the InAppBrowser plugin (needed for Facebook OAuth on device)
 
         `cordova plugin add cordova-plugin-inappbrowser`
@@ -56,18 +55,21 @@ Setting up the DevFest App
         `ionic plugin add https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git`
 
 8. Add desired platforms (NOTE: you can only `add ios` if on a Mac)
-```
-    ionic platform add ios
-    ionic platform add android
-```
+
+    `ionic platform add ios`
+    
+    `ionic platform add android`
+
 9. Test in an emulator (NOTE: you can only `emulate ios` if on a Mac)
-```
-    sudo npm install -g ios-sim
-    cordova emulate ios
-    cordova emulate android
-```
+
+    `sudo npm install -g ios-sim`
+    
+    `cordova emulate ios`
+    
+    `cordova emulate android`
+
 10. Run on desired platform (NOTE: you can only `run ios` if on a Mac)
-```
-    ionic run ios
-    ionic run android
-```
+
+    `ionic run ios`
+    
+    `ionic run android`
