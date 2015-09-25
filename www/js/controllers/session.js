@@ -4,11 +4,10 @@
   var sessionCtrl = function($scope, $stateParams, $q, $ionicLoading, $timeout, Config, SessionService, FavoriteService) {
     $scope.favorites = FavoriteService.favorites;
     $scope.session = SessionService.$getRecord($stateParams.sessionId);
+    $scope.session.isFave = false;
     
-    // When we get the session resource back, check to see if it matches any in the favorites and set a flag so the
-    // heart displays red.
     angular.forEach($scope.favorites, function(fave) {
-      if ($scope.session.$id == fave.id)
+      if ($scope.session.$id == fave.$id)
         $scope.session.isFave = true;
     });
 
@@ -43,9 +42,14 @@
       var currentSession = $scope.session;
       if (!currentSession.isFave) {
         FavoriteService.addFave(currentSession, successCB, errorCB);
+        var ref = SessionService.$ref();
+        ref.child(currentSession.$id).child('faveCounter').set(currentSession.faveCounter + 1);
+        currentSession.isFave = true;
       } else {
         currentSession.isFave = false;
         FavoriteService.removeFave(currentSession);
+        var ref = SessionService.$ref();
+        ref.child(currentSession.$id).child('faveCounter').set(currentSession.faveCounter - 1);
       }
     };
 
@@ -65,12 +69,15 @@
         var hour = $scope.session.time.substring(0, $scope.session.time.indexOf(':'));
         if ($scope.session.time.indexOf('pm') > -1)
             hour = parseInt(hour) + 12;
-        var today = new Date();
-        var startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, '00', '00');
-        var endDate = new Date();
-        endDate.setTime(startDate.getTime() + 3600000); // one hour
+        var event = new Date(Config.eventDate);
+        var startDate = new Date(event.getFullYear(), event.getMonth(), event.getDate(), hour, 0, 0);
+        var endDate = new Date(Config.eventDate);
+        endDate.setTime(startDate.getTime() + Config.sessionLegth);
 
-        window.plugins.calendar.createEvent($scope.session.title, $scope.session.room, $scope.session.description, startDate, endDate,
+        var calOptions = window.plugins.calendar.getCalendarOptions();
+        calOptions.firstReminderMinutes = 10;
+        calOptions.secondReminderMinutes = 5;
+        window.plugins.calendar.createEventWithOptions($scope.session.title, $scope.session.room, $scope.session.description, startDate, endDate, calOptions,
           function () {
             showToast($scope.session.title + ' has been added to your calendar.');
           },

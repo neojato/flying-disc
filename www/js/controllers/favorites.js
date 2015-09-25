@@ -1,8 +1,7 @@
 (function() {
   'use strict';
   
-  // Uses the Favorites Service to filter the list that we've marked...
-  var favoritesCtrl = function($scope, $ionicLoading, Config, FavoriteService) {
+  var favoritesCtrl = function($scope, $ionicLoading, Config, FavoriteService, SessionService) {
     $scope.favorites = FavoriteService.favorites;
     $scope.showDelete = false;
 
@@ -29,8 +28,14 @@
         console.log('Share plugin not available');
       }
     };
+    
+    $scope.remove = function(session) {
+      FavoriteService.removeFave(session);
+      var ref = SessionService.$ref();
+      ref.child(currentSession.$id).child('faveCounter').set(session.faveCounter - 1);
+    };
   };
 
   var app = angular.module('devfest')
-    .controller('FavoritesCtrl', ['$scope', '$ionicLoading', 'Config', 'FavoriteService', favoritesCtrl]);
+    .controller('FavoritesCtrl', ['$scope', '$ionicLoading', 'Config', 'FavoriteService', 'SessionService', favoritesCtrl]);
 }())
