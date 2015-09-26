@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $timeout, $state, Config, AuthService, UserService, SponsorService) {
+  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $ionicUser, $timeout, $state, Config, AuthService, UserService, SponsorService) {
     $scope.date = new Date();
     $scope.users = UserService;
     $scope.eventName = Config.eventName;
@@ -77,6 +77,7 @@
       users.once('value', function(snapshot) {
         var user = {
           uid: data.uid,
+          user_id: data.uid,
           provider: data.provider,
           name: $scope.getName(data),
           email: $scope.getEmail(data),
@@ -84,6 +85,9 @@
           link: $scope.getLink(data),
           image: $scope.getImage(data)
         };
+        
+        $ionicUser.identify(user);
+        
         if (!snapshot.hasChild(data.uid)) {
           // save user info
           users.child(data.uid).set(user);
@@ -179,5 +183,5 @@
   };
 
   var app = angular.module('devfest')
-    .controller('AppCtrl', ['$rootScope', '$scope', '$ionicModal', '$ionicLoading', '$timeout', '$state', 'Config', 'AuthService', 'UserService', 'SponsorService', appCtrl]);
+    .controller('AppCtrl', ['$rootScope', '$scope', '$ionicModal', '$ionicLoading', '$ionicUser', '$timeout', '$state', 'Config', 'AuthService', 'UserService', 'SponsorService', appCtrl]);
 }())

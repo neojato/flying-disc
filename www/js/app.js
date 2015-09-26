@@ -4,9 +4,11 @@
 (function() {
   'use strict';
 
-  var app = angular.module('devfest', ['ionic', 'firebase', 'ngSanitize', 'ngStorage'])
-    .run(function($ionicPlatform) {
+  var app = angular.module('devfest', ['ionic','ionic.service.core','ionic.service.analytics', 'firebase', 'ngSanitize', 'ngStorage'])
+    .run(function($ionicPlatform, $ionicAnalytics) {
       $ionicPlatform.ready(function() {
+        $ionicAnalytics.register();
+        
         // Override the default HTML alert with native dialog - requires the cordova dialogs plugin
         if (navigator.notification) {
           window.alert = function (message) {
