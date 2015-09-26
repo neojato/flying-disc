@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  var aboutCtrl = function($scope, $sce, Config, AboutService) {
+  var aboutCtrl = function($scope, $sce, $ionicPopover, Config, AboutService) {
     $scope.loading = true;
     $scope.organizers = [];
     $scope.images = [];
@@ -59,8 +59,26 @@
       window.open(link, '_system', 'location=yes');
       return false;
     };
+    
+    $ionicPopover.fromTemplateUrl('templates/about-popover.html', {
+      scope: $scope
+    }).then(function(popover) {
+      $scope.popover = popover;
+    });
+
+    $scope.showFilterPopover = function($event) {
+      $scope.popover.show($event);
+    };
+
+    $scope.closePopover = function() {
+      $scope.popover.hide();
+    };
+
+    $scope.$on('$destroy', function() {
+      $scope.popover.remove();
+    });
   };
 
   var app = angular.module('devfest')
-    .controller('AboutCtrl', ['$scope', '$sce', 'Config', 'AboutService', aboutCtrl]);
+    .controller('AboutCtrl', ['$scope', '$sce', '$ionicPopover', 'Config', 'AboutService', aboutCtrl]);
 }())

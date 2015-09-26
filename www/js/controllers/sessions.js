@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  var sessionsCtrl = function($scope, SessionService, $ionicPopover) {
+  var sessionsCtrl = function($scope, SessionService) {
     // Get all the sessions
     $scope.sessions = SessionService;
 
@@ -20,28 +20,8 @@
     };
 
     $scope.clear = function() { $scope.searchTxt = '' };
-
-    // About version popover handling
-    $ionicPopover.fromTemplateUrl('templates/about-popover.html', {
-      scope: $scope
-    }).then(function(popover) {
-      $scope.popover = popover;
-    });
-
-    $scope.showFilterPopover = function($event) {
-      $scope.popover.show($event);
-    };
-
-    $scope.closePopover = function() {
-      $scope.popover.hide();
-    };
-
-    // Cleanup the popover upon destroy event
-    $scope.$on('$destroy', function() {
-      $scope.popover.remove();
-    });
   };
 
   var app = angular.module('devfest')
-    .controller('SessionsCtrl', ['$scope', 'SessionService', '$ionicPopover', sessionsCtrl]);
+    .controller('SessionsCtrl', ['$scope', 'SessionService', sessionsCtrl]);
 }())
