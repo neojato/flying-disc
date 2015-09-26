@@ -6,35 +6,34 @@
     <button class="button button-icon icon ion-more" ng-click="showFilterPopover($event)"></button>
   </ion-nav-buttons>
 
-  <ion-content class="has-header">
-    <div class="gdg_loading" ng-show="loading"></div>
-    <div class="list card" ng-hide="loading">
-      <div class="item item-divider">
-        <h2>About</h2>
-      </div>
-      <div class="item item-body">
-        <p class="about" ng-bind-html="desc | externalLinks"></p>
-      </div>
-    </div>
-    <div class="list card" ng-hide="loading">
-      <div class="item item-divider">
-        <h2>Organizers</h2>
-      </div>
-      <div class="item item-body">
-        <ion-item ng-repeat="org in organizers" type="item-text-wrap" class="item-avatar" href="#" ng-click="openLink('{{org.url}}')">
-          <img ng-src="{{getImage(org.id)}}"/>&nbsp;&nbsp;<strong>{{org.name}}</strong><br />&nbsp;&nbsp;Organizer
-        </ion-item>
-      </div>
-    </div>
-    <div class="list card" ng-hide="loading">
-      <div class="item item-divider">
-        <h2>Links</h2>
-      </div>
-      <div class="item item-body">
-        <ion-item ng-repeat="link in links" type="item-text-wrap" href="#" ng-click="openLink('{{link.url}}')">
-          <img src="{{link.image}}"/>&nbsp;&nbsp;{{link.label}}
-        </ion-item>
-      </div>
-    </div>
+  <ion-content class="has-header" horizontal-scroll="false">
+    <ion-slide-box slide-tabs-scrollable="false"  show-pager="false" ion-slide-tabs>
+      <ion-slide ion-slide-tab-label="About">
+        <div class="gdg_loading" ng-show="loading"></div>
+        <div class="list card" ng-hide="loading">
+          <div class="item item-body">
+            <p class="about" ng-bind-html="desc | externalLinks"></p>
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide ion-slide-tab-label="Organizers">
+        <div class="list card" ng-hide="loading">
+          <div class="item item-body">
+            <ion-item ng-repeat="org in organizers" type="item-text-wrap" class="item-avatar" href="#" ng-click="openLink('{{org.url}}')">
+              <img ng-src="{{getImage(org.id)}}"/>&nbsp;&nbsp;<strong>{{org.name}}</strong><br />&nbsp;&nbsp;Organizer
+            </ion-item>
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide ion-slide-tab-label="Links">
+        <div class="list card" ng-hide="loading">
+          <div class="item item-body">
+            <ion-item ng-repeat="link in links" type="item-text-wrap" href="#" ng-click="openLink('{{link.url}}')">
+              <img src="{{link.image}}"/>&nbsp;&nbsp;{{link.label}}
+            </ion-item>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slide-box>
   </ion-content>
 </ion-view>
