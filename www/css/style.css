@@ -1,14 +1,16 @@
+@charset "UTF-8";
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
 
 @font-face {
 	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?-4hmhav');
-	src:url('fonts/icomoon.eot?#iefix-4hmhav') format('embedded-opentype'),
-		url('fonts/icomoon.ttf?-4hmhav') format('truetype'),
-		url('fonts/icomoon.woff?-4hmhav') format('woff'),
-		url('fonts/icomoon.svg?-4hmhav#icomoon') format('svg');
+	src:url('../fonts/icomoon/icomoon.eot?-4hmhav');
+	src:url('../fonts/icomoon/icomoon.eot?#iefix-4hmhav') format('embedded-opentype'),
+		url('../fonts/icomoon/icomoon.ttf?-4hmhav') format('truetype'),
+		url('../fonts/icomoon/icomoon.woff?-4hmhav') format('woff'),
+		url('../fonts/icomoon/icomoon.svg?-4hmhav#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -32,9 +34,10 @@
 }
 
 .gdg_loading {
-    background: url('../img/gdg_loading.gif') no-repeat 0 0 rgb(255, 255, 255);
-    width: 64px;
-    height: 64px;
+  background: url('../img/gdg_loading.gif') no-repeat 0 0 rgb(255, 255, 255);
+  padding: 20px;
+  width: 64px;
+  height: 64px;
 }
 
 .nav-header {
@@ -134,9 +137,11 @@
   color: #1f5880;
   font-weight: bold;
 }
+/*
 h1, h6 {
   font-family: 'Arial', serif;
 }
+*/
 .pic {
   max-height: 120px;
   max-width: 120px;
@@ -144,9 +149,11 @@ h1, h6 {
 h1 .title {
   font-size: 19px;
 }
+/*
 h6 span {
   font-family: 'Arial', serif;
 }
+*/
 .popover {
   height: 200px;
   color: #000000;
