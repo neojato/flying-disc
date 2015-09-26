@@ -39,11 +39,9 @@
   width: 64px;
   height: 64px;
 }
-
 .nav-header {
   top: 140px !important;
 }
-
 .topbar {
   position: fixed;
   top: 0;
@@ -51,7 +49,7 @@
   right: 0;
   height: 56px;
   line-height: 56px;
-  background: #ef473a;
+  background: #F44336;
   color: #ffffff;
   z-index: 1104;
   background-size: cover;
@@ -61,9 +59,9 @@
 }
 .topbar.large {
   height: 140px;
-  border-color: #e42012;
-  background-color: #ef473a;
-  background-image: linear-gradient(0deg, #ef473a, #ef473a 50%, transparent 50%);
+  border-color: #D50000;
+  background-color: #F44336;
+  background-image: linear-gradient(0deg, #F44336, #F44336 50%, transparent 50%);
   color: #fff;
 }
 .topbar .username {
@@ -91,7 +89,6 @@
 .depth.z1 {
   box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.4);
 }
-
 .padLbl {
   padding: 5px;
 }
@@ -107,16 +104,13 @@
 .item .sessionTitle :first-child {
   white-space: normal;
 }
-
 .item .name {
   white-space: normal;
   padding-left: 50px;
 }
-
 .about a {
-  color: #e42012;
+  color: #F44336;
 }
-
 .fave {
   color: red;
 }
@@ -128,20 +122,10 @@
 .item.btnLogin {
   padding: 4px;
 }
-
 .addCal {
   float: right;
   font-size: 20px;
 }
-.tab-item {
-  color: #1f5880;
-  font-weight: bold;
-}
-/*
-h1, h6 {
-  font-family: 'Arial', serif;
-}
-*/
 .pic {
   max-height: 120px;
   max-width: 120px;
@@ -149,11 +133,6 @@ h1, h6 {
 h1 .title {
   font-size: 19px;
 }
-/*
-h6 span {
-  font-family: 'Arial', serif;
-}
-*/
 .popover {
   height: 200px;
   color: #000000;
@@ -161,7 +140,7 @@ h6 span {
 .popover a {
   text-decoration: none;
 }
-.popover .padLbl{
+.popover .padLbl {
   margin-top: 30px;
 }
 .popover .about {
