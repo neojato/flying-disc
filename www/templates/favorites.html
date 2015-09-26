@@ -3,10 +3,17 @@
     <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-nav-buttons side="right">
-    <button class="button button-icon icon ion-trash-a" ng-click="showBtn()"></button>
+    <button class="button button-icon icon ion-trash-b" ng-click="showBtn()" ng-show="favorites.length"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-    <p class="padLbl" ng-show="favorites.length==0">You haven't added any favorites yet!</p>
+    <div class="list card" ng-show="favorites.length==0">
+      <div class="item item-divider">
+        You haven't added any favorites yet!
+      </div>
+      <div class="item item-body">
+        <p>Browse the session list, select your favorite ones, and then come back here to easily find them!</p>
+      </div>
+    </div>
     <ion-list show-delete="showDelete">
       <ion-item ng-repeat="favorite in favorites" type="item-text-wrap" class="item-avatar" href="#/app/sessions/{{favorite.$id}}"><img ng-src="{{favorite.image || 'img/topicIcon.png'}}"/>
         <p class="title"><strong>{{favorite.title}}</strong><br />{{favorite.speaker}}</p>
