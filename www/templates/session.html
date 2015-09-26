@@ -13,15 +13,15 @@
         <p>{{session.description}}</p>
       </div>
       <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" ng-click="addFavorite()">
+        <a class="tab-item" ng-click="addFavorite()" ion-track-tap="Favorite Button" ion-track-data="{ session: session.title, fave: (!session.isFave ? 'add' : 'remove')}">
           <i class="icon ion-heart" ng-class="{'fave': session.isFave}"></i>
           Favorite
         </a>
-        <a class="tab-item" ng-click="addToCalendar()">
+        <a class="tab-item" ng-click="addToCalendar()" ion-track-tap="Calendar Button" ion-track-data="{ session: session.title }">
           <i class="icon ion-calendar"></i>
           Add
         </a>
-        <a class="tab-item" ng-click="share()">
+        <a class="tab-item" ng-click="share()" ion-track-tap="Share Button" ion-track-data="{ session: session.title }">
           <i class="icon ion-share"></i>
           Share
         </a>
