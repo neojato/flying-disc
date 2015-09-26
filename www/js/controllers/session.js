@@ -56,17 +56,24 @@
     $scope.addToCalendar = function() {
       if (window.plugins && window.plugins.calendar) {
         var hour = $scope.session.time.substring(0, $scope.session.time.indexOf(':'));
+        var minutes = $scope.session.time.substring($scope.session.time.indexOf(':')+1, $scope.session.time.indexOf(' '));
         if ($scope.session.time.indexOf('pm') > -1)
             hour = parseInt(hour) + 12;
-        var event = new Date(Config.eventDate);
-        var startDate = new Date(event.getFullYear(), event.getMonth(), event.getDate(), hour, 0, 0);
-        var endDate = new Date(Config.eventDate);
-        endDate.setTime(startDate.getTime() + Config.sessionLegth);
+        
+        function parseDate(str) {
+          var d = str.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+          return (d) ? new Date(d[1], d[2]-1, d[3]) : new Date();
+        }
+        
+        var event = parseDate(Config.eventDate);
+        var sessionStart = new Date(event.getFullYear(), event.getMonth(), event.getDate(), hour, minutes, 0);
+        var sessionEnd = parseDate(Config.eventDate);
+        sessionEnd.setTime(parseInt(sessionStart.getTime()) + parseInt(Config.sessionLength));
 
         var calOptions = window.plugins.calendar.getCalendarOptions();
         calOptions.firstReminderMinutes = 10;
         calOptions.secondReminderMinutes = 5;
-        window.plugins.calendar.createEventWithOptions($scope.session.title, $scope.session.room, $scope.session.description, startDate, endDate, calOptions,
+        window.plugins.calendar.createEventWithOptions($scope.session.title, $scope.session.room, $scope.session.description, sessionStart, sessionEnd, calOptions,
           function () {
             showToast($scope.session.title + ' has been added to your calendar.');
           },

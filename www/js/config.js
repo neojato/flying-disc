@@ -12,7 +12,7 @@
       'eventName'     : 'GDG DevFest KC', // typically 'DevFest [place]'
       'eventURL'      : 'http://devfest.gdgkc.org', // link to event website (ex. G+, Meetup, Eventbrite, etc)
       'ticketURL'     : '', // link to buy tickets
-      'eventDate'     : '2015-12-05', // ISO formetted YYYY-MM-DD (currently only supports 1 day DevFest)
+      'eventDate'     : '2015-12-05', // ISO formatted YYYY-MM-DD (currently only supports a single day DevFest)
       'eventStart'    : '09:00:00', // start time
       'eventEnd'      : '16:00:00', // end time
       'sessionLength' : '2700000' // use minutes in milliseconds
