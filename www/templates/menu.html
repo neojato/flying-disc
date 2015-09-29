@@ -7,11 +7,23 @@
   </ion-pane>
 
   <ion-side-menu side="left">
-    <header class="topbar drawer large" style="background-image:url(img/gdg_{{user.provider}}.png)">
+    <header class="topbar drawer large">
       <img class="gravatar depth z1" ng-src="{{user.image}}">
       <div class="username">
         <strong>{{eventName}}</strong>
-        <br>{{user.name ? user.name : (user.provider === 'twitter' ? '@' + user.handle : user.handle) || ''}}
+        <br>
+        <span ng-if="user.provider === 'google'" class="icon-left ion-social-googleplus">
+          &nbsp;{{user.name ? user.name : user.handle || ''}}
+        </span>
+        <span ng-if="user.provider === 'facebook'" class="icon-left ion-social-facebook">
+          &nbsp;{{user.name ? user.name : user.handle || ''}}
+        </span>
+        <span ng-if="user.provider === 'twitter'" class="icon-left ion-social-twitter">
+          &nbsp;{{user.name ? user.name : '@' + user.handle || ''}}
+        </span>
+        <span ng-if="user.provider === 'github'" class="icon-left ion-social-github">
+          &nbsp;{{user.name ? user.name : user.handle || ''}}
+        </span>
       </div>
     </header>
     <ion-content class="nav-header">

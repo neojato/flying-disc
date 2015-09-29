@@ -75,7 +75,7 @@
   top: 56px;
   width: 100%;
   z-index: 1110;
-  text-shadow: 2px 2px 12px #000000;
+  text-shadow: 1px 1px 2px #000000;
 }
 .topbar .gravatar {
   border-radius: 50%;
