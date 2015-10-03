@@ -105,6 +105,16 @@
             controller: 'SponsorsCtrl'
           }
         }
+      })
+
+      .state('app.devfest', {
+        url: "/devfest",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/devfest-about.html",
+            controller: 'DevFestAboutCtrl'
+          }
+        }
       });
       // if none of the above states are matched, use this as the fallback
       $urlRouterProvider.otherwise('/app/sessions');
