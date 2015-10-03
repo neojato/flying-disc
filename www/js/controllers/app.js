@@ -1,12 +1,10 @@
 (function() {
   'use strict';
   
-  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $ionicUser, $timeout, $state, Config, AuthService, UserService, SponsorService) {
+  var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $ionicUser, $timeout, $state, Config, AuthService, UserService) {
     $scope.date = new Date();
     $scope.users = UserService;
     $scope.eventName = Config.eventName;
-    $scope.ticketURL = Config.ticketURL;
-    $scope.sponsors = SponsorService.sponsors;
 
     // Init the login modal
     $scope.loginData = {};

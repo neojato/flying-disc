@@ -4,7 +4,17 @@
 (function() {
   'use strict';
 
-  var app = angular.module('devfest', ['ionic','ionic.service.core','ionic.service.analytics', 'firebase', 'ngSanitize', 'ngStorage'])
+  var app = angular.module('devfest', [
+    'ionic',
+    'ionic.service.core',
+    'ionic.service.analytics',
+    'firebase',
+    'ngSanitize',
+    'ngStorage',
+    'angular.filter'
+  ])
+  
+  
     .run(function($ionicPlatform, $ionicAnalytics) {
       $ionicPlatform.ready(function() {
         $ionicAnalytics.register();
