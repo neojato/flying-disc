@@ -10,7 +10,7 @@
       'location'      : 'Kansas City metro', // city location of GDG
       'email'         : 'gdgkansascity@gmail.com', // the email where you receive GDG emails
       'id'            : '116015988631052616691', // Google+ profile id for the GDG
-      'googleAPI'     : 'AIzaSyB3g3Fr3M56bILSK2aqn6arqU1CQt1zb3E', // Google API Key
+      'googleAPI'     : 'AIzaSyBJk9lXgnmWeosw3FTsRVBkAaXohL6XTtc', // Google API Key
       'website'       : 'http://gdgkc.org', // GDG website, custom domain or [your-app].appspot.com
       'allowRegister' : false, // set to false once your "admin" login has been setup to prevent unauthorized account creations
       
