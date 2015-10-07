@@ -2,10 +2,8 @@
   'use strict';
   
   var sessionsCtrl = function($scope, SessionService) {
-    // Get all the sessions
     $scope.sessions = SessionService;
 
-    // Filter sessions by entering text in field and selecting from drop-down
     $scope.setFilter = function() {
       var search = $scope.searchTxt;
       var field = this.field;
