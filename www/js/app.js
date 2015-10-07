@@ -14,7 +14,6 @@
     'angular.filter'
   ])
   
-  
     .run(function($ionicPlatform, $ionicAnalytics) {
       $ionicPlatform.ready(function() {
         $ionicAnalytics.register();
@@ -103,6 +102,26 @@
           'menuContent': {
             templateUrl: "templates/sponsors.html",
             controller: 'SponsorsCtrl'
+          }
+        }
+      })
+
+      .state('app.speakers', {
+        url: "/speakers",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/speakers.html",
+            controller: 'SpeakersCtrl'
+          }
+        }
+      })
+
+      .state('app.speaker', {
+        url: "/speakers/:speakerId",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/speaker.html",
+            controller: 'SpeakerCtrl'
           }
         }
       })

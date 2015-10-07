@@ -104,6 +104,11 @@
 .item .sessionTitle :first-child {
   white-space: normal;
 }
+.item .speakerTitle {
+  padding-left: 140px;
+  top: 16px;
+  position: absolute;
+}
 .item .name {
   white-space: normal;
   padding-left: 50px;
@@ -157,4 +162,28 @@ h1 .title {
 }
 .platform-ios .popover-arrow::after {
   background-color: #444444;
+}
+.speaker-avatar {
+  height: 40px;
+  width: 40px;
+  overflow: hidden;
+  float: left;
+  border: 1px solid #eb463b;
+  border-radius: 50%;
+}
+.speaker-avatar img {
+  height: auto;
+  width: 100%;
+  left: 16px;
+}
+.speaker-thumbnail {
+  top: 16px;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 5%;
+  border: 1px solid #eb463b;
+}
+.speaker-thumbnail img {
+  width: 100%;
 }
