@@ -22,7 +22,7 @@
       'eventEmail'    : 'devfest@gdgkc.org', // Email where event inquries should go
       'speakerURL'    : 'https://goo.gl/rEypu0', // link to the 'Call for Papers' form
       'sponsorURL'    : 'https://goo.gl/n4KoLu', // link to the sponsorship form
-      'ticketURL'     : '', // link to buy tickets
+      'ticketURL'     : 'https://goo.gl/YNDSnR', // link to buy tickets
       'eventDate'     : '2015-12-05', // ISO formatted YYYY-MM-DD (currently only supports a single day DevFest)
       'eventStart'    : '09:00:00', // start time
       'eventEnd'      : '16:00:00', // end time
