@@ -29,8 +29,6 @@
     $scope.loginModal = function() {
       $scope.loginData = {};
       $scope.loginMsg = '';
-      if ($scope.modal != undefined)
-        $scope.modal.show();
     };
 
     // Firebase social login (Facebook, Twitter, GitHub, Google+)
@@ -55,11 +53,11 @@
     
     AuthService.$onAuth(function(authData) {
       if (authData === null) {
-        if ($scope.modal != undefined)
+        if ($scope.modal !== undefined)
           $scope.modal.show();
       } else {
         checkIfUserExists(authData);
-        if ($scope.modal != undefined)
+        if ($scope.modal !== undefined)
           $scope.modal.hide();
       }
     });
