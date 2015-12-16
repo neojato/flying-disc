@@ -12,7 +12,7 @@
     });
     
     $scope.getSessionIcon = function(session) {
-      var icon = 'img/topicIcon.png';
+      var icon = 'img/topicGDG.png';
       if (session.speaker) {
         if (session.track === '1') {
           icon = 'img/topicAndroid.png';
