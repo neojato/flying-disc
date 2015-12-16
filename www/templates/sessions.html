@@ -1,34 +1,36 @@
-<ion-view title="Session Schedule">
+<ion-view title="DevFest KC Schedule">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
-
-  <ion-header-bar class="bar bar-stable bar-subheader item-input-inset">
-    <div class="item-input-wrapper">
-      <i class="icon ion-search placeholder-icon"></i>
-      <input id="searchKey" type="search" placeholder="Search Schedule" ng-model="searchTxt" autocorrect="off" ng-change="setFilter()">
-      <button class="button button-clear" ng-click="clear()">X</button>
-    </div>
-  </ion-header-bar>
-
-  <ion-content class="has-header has-subheader">
-    <ion-list class="list">
-      <label class="item item-input item-select">
-        <div class="input-label pull-right">
-          <strong>Sort By</strong>
+  <ion-content class="has-header">
+    <ion-slide-box slide-tabs-scrollable="false" show-pager="false" ion-slide-tabs>
+      <ion-slide ion-slide-tab-label="Mobile / Android">
+        <div class="gdg_loading" ng-show="loading"></div>
+        <div ng-hide="loading">
+          <ion-item ng-repeat="session in sessions | filter:{track: '1'}:true | orderBy:'time'" type="item-text-wrap" class="item-avatar" href="#/app/sessions/{{session.$id}}">
+            <img ng-src="{{getSessionIcon(session)}}"/>
+            <div class="title"><strong>{{session.title}}</strong><br />{{getTime(session.time) | date:'shortTime'}} <span ng-if="session.speaker">| {{session.speaker}}</span></div>
+          </ion-item>
         </div>
-        <select ng-model="field">
-          <option value="all" ng-selected=true>All</option>
-          <option value="title">Title</option>
-          <option value="speaker">Speaker</option>
-          <option value="description">Description</option>
-          <option value="room">Room</option>
-        </select>
-      </label>
-      <ion-item ng-repeat="session in sessions | filter:search | orderBy: field" type="item-text-wrap"
-        class="item-avatar" href="#/app/sessions/{{session.$id}}"><img ng-src="{{'img/topicIcon.png'}}"/>
-        <p class="title"><strong>{{session.title}}</strong><br />{{session.speaker}}</p>
-      </ion-item>
-    </ion-list>
+      </ion-slide>
+      <ion-slide ion-slide-tab-label="Cloud / Web">
+        <div class="gdg_loading" ng-show="loading"></div>
+        <div ng-hide="loading">
+          <ion-item ng-repeat="session in sessions | filter:{track: '2'}:true | orderBy:'time'" type="item-text-wrap" class="item-avatar" href="#/app/sessions/{{session.$id}}">
+            <img ng-src="{{getSessionIcon(session)}}"/>
+            <div class="title"><strong>{{session.title}}</strong><br />{{getTime(session.time) | date:'shortTime'}} <span ng-if="session.speaker">| {{session.speaker}}</span></div>
+          </ion-item>
+        </div>
+      </ion-slide>
+      <ion-slide ion-slide-tab-label="Workshops">
+        <div class="gdg_loading" ng-show="loading"></div>
+        <div ng-hide="loading">
+          <ion-item ng-repeat="session in sessions | filter:{track: '3'}:true | orderBy:'time'" type="item-text-wrap" class="item-avatar" href="#/app/sessions/{{session.$id}}">
+            <img ng-src="{{getSessionIcon(session)}}"/>
+            <div class="title"><strong>{{session.title}}</strong><br />{{getTime(session.time) | date:'shortTime'}} <span ng-if="session.speaker">| {{session.speaker}}</span></div>
+          </ion-item>
+        </div>
+      </ion-slide>
+    </ion-slide-box>
   </ion-content>
 </ion-view>
