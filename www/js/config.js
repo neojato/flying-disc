@@ -15,15 +15,15 @@
       'allowRegister' : false, // set to false once your "admin" login has been setup to prevent unauthorized account creations
       
       // event details
-      'eventName'     : 'GDG DevFest KC', // typically 'DevFest [place]'
+      'eventName'     : 'DevFest KC', // typically 'DevFest [place]'
       'eventLocation' : 'Jack Reardon Convention Center', // location of event
       'eventAddress'  : '520 Minnesota Ave, Kansas City, KS 66101', // address of event
-      'eventURL'      : 'http://devfest.gdgkc.org', // link to event website (ex. G+, Meetup, Eventbrite, etc)
+      'eventURL'      : 'https://devfest.gdgkc.org', // link to event website (ex. G+, Meetup, Eventbrite, etc)
       'eventEmail'    : 'devfest@gdgkc.org', // Email where event inquries should go
       'speakerURL'    : 'https://goo.gl/rEypu0', // link to the 'Call for Papers' form
       'sponsorURL'    : 'https://goo.gl/n4KoLu', // link to the sponsorship form
       'ticketURL'     : 'https://goo.gl/YNDSnR', // link to buy tickets
-      'eventDate'     : '2015-12-05', // ISO formatted YYYY-MM-DD (currently only supports a single day DevFest)
+      'eventDate'     : '2016-02-20', // ISO formatted YYYY-MM-DD (currently only supports a single day DevFest)
       'eventStart'    : '09:00:00', // start time
       'eventEnd'      : '16:00:00', // end time
       'sessionLength' : '2700000', // use minutes in milliseconds
