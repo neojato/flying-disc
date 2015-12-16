@@ -1,25 +1,36 @@
 (function() {
   'use strict';
   
-  var sessionsCtrl = function($scope, SessionService) {
+  var sessionsCtrl = function($scope, Config, SessionService) {
     $scope.sessions = SessionService;
-
-    $scope.setFilter = function() {
-      var search = $scope.searchTxt;
-      var field = this.field;
-
-      if (field === 'title')
-        $scope.search = {title:search};
-      else if (field === 'speaker')
-        $scope.search = {speaker:search};
-      else if (field === 'description')
-        $scope.search = {description:search};
-      else $scope.search = {$:search}; // ALL cases
+    
+    $scope.getTime = function(time) {
+      var sHour = time.substring(0, time.indexOf(':'));
+      var sMinutes = time.substring(time.indexOf(':')+1, time.indexOf(':')+3);
+      var event = parseDate(Config.eventDate);
+      return new Date(event.getFullYear(), event.getMonth(), event.getDate(), sHour, sMinutes, 0);
     };
 
-    $scope.clear = function() { $scope.searchTxt = '' };
+    function parseDate(str) {
+      var d = str.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+      return (d) ? new Date(d[1], d[2]-1, d[3]) : new Date();
+    }
+    
+    $scope.getSessionIcon = function(session) {
+      var icon = 'img/topicIcon.png';
+      if (session.speaker) {
+        if (session.track === '1') {
+          icon = 'img/topicAndroid.png';
+        } else if (session.track === '2') {
+          icon = 'img/topicCloud.png';
+        } else if (session.track === '3') {
+          icon = 'img/topicWorkshop.png';
+        }
+      }
+      return icon;
+    };
   };
 
   var app = angular.module('devfest')
-    .controller('SessionsCtrl', ['$scope', 'SessionService', sessionsCtrl]);
+    .controller('SessionsCtrl', ['$scope', 'Config', 'SessionService', sessionsCtrl]);
 }())
