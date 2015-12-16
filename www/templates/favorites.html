@@ -15,8 +15,8 @@
       </div>
     </div>
     <ion-list show-delete="showDelete">
-      <ion-item ng-repeat="favorite in favorites" type="item-text-wrap" class="item-avatar" href="#/app/sessions/{{favorite.$id}}"><img ng-src="{{favorite.image || 'img/topicIcon.png'}}"/>
-        <p class="title"><strong>{{favorite.title}}</strong><br />{{favorite.speaker}}</p>
+      <ion-item ng-repeat="favorite in favorites" type="item-text-wrap" class="item-avatar" href="#/app/sessions/{{favorite.$id}}"><img ng-src="{{getSessionIcon(favorite)}}"/>
+        <p class="title"><strong>{{favorite.title}}</strong><br />{{getTime(favorite.time) | date:'shortTime'}} <span ng-if="favorite.speaker">| {{favorite.speaker}}</span></p>
         <ion-option-button class="button-calm" ng-click="share(favorite)">Share</ion-option-button>
         <ion-delete-button class="ion-minus-circled" ng-click="remove(favorite)"></ion-delete-button>
       </ion-item>
