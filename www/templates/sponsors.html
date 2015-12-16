@@ -12,13 +12,13 @@
         Share with us a huge thank you for all of our sponsors listed here. Without their help, this year's {{ eventName }} event would not have been possible.
       </div>
     </div>
-    <div class="list card" ng-repeat="(key, value) in sponsors | groupBy:'level'">
+    <div class="list card" ng-repeat="(key, value) in sponsors | levelSorter:'level' | groupBy:'level'">
       <div class="item item-divider">
         <h2>{{ key }} Sponsor</h2>
       </div>
       <div class="item item-body">
         <ion-item ng-repeat="sponsor in value" type="item-text-wrap" style="text-align: center;" href="#" ng-click="openLink('{{ sponsor.link }}')">
-          <img ng-src="{{ sponsor.image }}" style="width: 120px;" />
+          <img ng-src="{{ sponsor.image }}" style="max-height: 120px;" />
         </ion-item>
       </div>
     </div>
