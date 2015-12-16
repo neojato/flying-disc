@@ -41,15 +41,8 @@
 
     $scope.share = function(session) {
       if (window.plugins && window.plugins.socialsharing) {
-        window.plugins.socialsharing.share(
-          'I\'ll be attending the session: ' + session.title + '.',
-          Config.eventName, null, Config.eventURL,
-          function() {
-            console.log('Success')
-          },
-          function (error) {
-            console.log('Share fail ' + error)
-          });
+        window.plugins.socialsharing.share('I\'ll be attending the session: "' + session.title + '" at #' + Config.eventName.replace(/\s+/g, '') + '!', null, null, Config.eventURL);
+        $ionicAnalytics.track('Favorite Share Button', { session: session.title });
       } else {
         console.log('Share plugin not available');
       }
