@@ -10,34 +10,54 @@
       if ($scope.session.$id == fave.$id)
         $scope.session.isFave = true;
     });
+    
+    $scope.getSessionIcon = function(session) {
+      var icon = 'img/topicIcon.png';
+      if (session.speaker) {
+        if (session.track === '1') {
+          icon = 'img/topicAndroid.png';
+        } else if (session.track === '2') {
+          icon = 'img/topicCloud.png';
+        } else if (session.track === '3') {
+          icon = 'img/topicWorkshop.png';
+        }
+      }
+      return icon;
+    };
 
     $scope.share = function() {
       if (window.plugins && window.plugins.socialsharing) {
-        window.plugins.socialsharing.share(
-          'I\'ll be attending the session: ' + $scope.session.title + '.',
-          Config.eventName, null, Config.eventURL,
-          function() {
-            // Share success
-          },
-          function (error) {
-            console.log('Share failed: ' + error)
-          });
+        window.plugins.socialsharing.share('I\'ll be attending the session: "' + $scope.session.title + '" at #' + Config.eventName.replace(/\s+/g, '') + '!', null, null, Config.eventURL);
       } else {
         console.log('Share plugin not available');
       }
     };
+    
+    $scope.getTime = function(time) {
+      var sHour = time.substring(0, time.indexOf(':'));
+      var sMinutes = time.substring(time.indexOf(':')+1, time.indexOf(':')+3);
+      var event = parseDate(Config.eventDate);
+      return new Date(event.getFullYear(), event.getMonth(), event.getDate(), sHour, sMinutes, 0);
+    };
+
+    function parseDate(str) {
+      var d = str.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+      return (d) ? new Date(d[1], d[2]-1, d[3]) : new Date();
+    }
 
     $scope.addFavorite = function() {
-      var currentSession = $scope.session;
+      var currentSession = $scope.session,
+          ref = SessionService.$ref();
+      
+      currentSession.faveCounter = $scope.session.faveCounter || 0;
+      
       if (!currentSession.isFave) {
         FavoriteService.addFave(currentSession, successCB, errorCB);
-        var ref = SessionService.$ref();
         ref.child(currentSession.$id).child('faveCounter').set(currentSession.faveCounter + 1);
         currentSession.isFave = true;
       } else {
         currentSession.isFave = false;
         FavoriteService.removeFave(currentSession);
-        var ref = SessionService.$ref();
         ref.child(currentSession.$id).child('faveCounter').set(currentSession.faveCounter - 1);
       }
     };
