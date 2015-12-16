@@ -17,19 +17,19 @@
       </div>
       <div class="item item-body">
         <ion-item ng-if="speaker.google" type="item-text-wrap" href="#" ng-click="openLink('{{ socialLink('google_plus', speaker.google) }}')">
-          <img ng-src="{{ favIcon(socialLink('google_plus', speaker.google)) }}"/>&nbsp;&nbsp;Google+
+          <i class="icon ion-social-googleplus"></i>&nbsp;&nbsp;{{speaker.google}}
         </ion-item>
         <ion-item ng-if="speaker.facebook" type="item-text-wrap" href="#" ng-click="openLink('{{ socialLink('facebook', speaker.facebook) }}')">
-          <img ng-src="{{ favIcon(socialLink('facebook', speaker.facebook)) }}"/>&nbsp;&nbsp;Facebook
+          <i class="icon ion-social-facebook"></i>&nbsp;&nbsp;{{speaker.facebook}}
         </ion-item>
         <ion-item ng-if="speaker.twitter" type="item-text-wrap" href="#" ng-click="openLink('{{ socialLink('twitter', speaker.twitter) }}')">
-          <img ng-src="{{ favIcon(socialLink('twitter', speaker.twitter)) }}"/>&nbsp;&nbsp;Twitter
+          <i class="icon ion-social-twitter"></i>&nbsp;&nbsp;@{{speaker.twitter}}
         </ion-item>
         <ion-item ng-if="speaker.github" type="item-text-wrap" href="#" ng-click="openLink('{{ socialLink('github', speaker.github) }}')">
-          <img ng-src="{{ favIcon(socialLink('github', github)) }}"/>&nbsp;&nbsp;GitHub
+          <i class="icon ion-social-github"></i>&nbsp;&nbsp;{{speaker.github}}
         </ion-item>
         <ion-item ng-if="speaker.website" type="item-text-wrap" href="#" ng-click="openLink('{{ speaker.website }}')">
-          <img ng-src="{{ favIcon(speaker.website) }}"/>&nbsp;&nbsp;Website
+          <i class="icon ion-earth"></i>&nbsp;&nbsp;{{speaker.website}}
         </ion-item>
       </div>
     </div>
