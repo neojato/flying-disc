@@ -2,10 +2,11 @@
   'use strict';
   
   var appCtrl = function($rootScope, $scope, $ionicModal, $ionicLoading, $ionicUser, $timeout, $state, Config, AuthService, UserService) {
-    $scope.date = new Date();
+    var date = new Date();
     $scope.users = UserService;
     $scope.eventName = Config.eventName;
     $scope.groupName = Config.name;
+    $scope.copyright = date.getFullYear() == '2015' ? '2015' : '2015-' + date.getFullYear();
 
     // Init the login modal
     $scope.loginData = {};
