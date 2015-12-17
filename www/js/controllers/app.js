@@ -7,6 +7,27 @@
     $scope.eventName = Config.eventName;
     $scope.groupName = Config.name;
     $scope.copyright = date.getFullYear() == '2015' ? '2015' : '2015-' + date.getFullYear();
+    
+    // initialize Ionic Push
+    Ionic.io();
+    var push = new Ionic.Push({
+      "debug": false,
+      "onNotification": function(notification) {
+        var payload = notification.payload;
+        console.log(notification);
+        console.log(payload);
+      },
+      "onRegister": function(data) {
+        console.log(data.token);
+      },
+      "pluginConfig": {
+         "android": {
+           "iconColor": "#B71C1C",
+           "forceShow": true,
+           "vibrate": true
+         }
+      } 
+    });
 
     // Init the login modal
     $scope.loginData = {};
@@ -67,6 +88,7 @@
 
     // Logout
     $scope.logout = function() {
+      push.unregister();
       AuthService.$unauth();
       showToast('Logout success!');
       $state.go('app.sessions');
@@ -86,22 +108,19 @@
           image: $scope.getImage(data)
         };
         
+        // send user info to Firebase
+        users.child(data.uid).set(user);
+        
+        // send user info to Ionic
         $ionicUser.identify(user);
         
         // Register with the Ionic Push service
-        Ionic.io();
-        var push = new Ionic.Push({});
         push.register(function(token) {
           $ionicUser.push('_push.android_tokens', token, true);
+          users.child(data.uid).update({token: token.token});
         });
         
-        if (!snapshot.hasChild(data.uid)) {
-          // save user info
-          users.child(data.uid).set(user);
-          $rootScope.user = user;
-        } else {
-          $rootScope.user = user;
-        }
+        $rootScope.user = user;
       });
     }
     
