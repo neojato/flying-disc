@@ -46,7 +46,7 @@
     // Firebase integration - Register your app and get your App ID from https://www.firebase.com
     // *** Add your Firebase Project ID here ***
     .constant('furl', 'https://flying-disc.firebaseio.com')
-
+  
     .config(function($stateProvider, $urlRouterProvider) {
       $stateProvider
       .state('app', {

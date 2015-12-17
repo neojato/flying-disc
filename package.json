@@ -29,7 +29,8 @@
       "id": "cordova-plugin-calendar"
     },
     "cordova-plugin-dialogs",
-    "cordova-plugin-statusbar"
+    "cordova-plugin-statusbar",
+    "phonegap-plugin-push"
   ],
   "cordovaPlatforms": [
     "ios",

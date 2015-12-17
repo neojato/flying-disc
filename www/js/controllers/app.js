@@ -11,7 +11,7 @@
     // Init the login modal
     $scope.loginData = {};
     $scope.loginMsg = '';
-
+    
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {
       scope: $scope
@@ -54,12 +54,14 @@
     
     AuthService.$onAuth(function(authData) {
       if (authData === null) {
-        if ($scope.modal !== undefined)
+        if ($scope.modal !== undefined) {
           $scope.modal.show();
+        }
       } else {
         checkIfUserExists(authData);
-        if ($scope.modal !== undefined)
+        if ($scope.modal !== undefined) {
           $scope.modal.hide();
+        }
       }
     });
 
@@ -85,6 +87,13 @@
         };
         
         $ionicUser.identify(user);
+        
+        // Register with the Ionic Push service
+        Ionic.io();
+        var push = new Ionic.Push({});
+        push.register(function(token) {
+          $ionicUser.push('_push.android_tokens', token, true);
+        });
         
         if (!snapshot.hasChild(data.uid)) {
           // save user info
