@@ -2,7 +2,12 @@
   'use strict';
   
   var sessionsCtrl = function($scope, Config, SessionService) {
+    $scope.loading = true;
     $scope.sessions = SessionService;
+    
+    $scope.sessions.$loaded(function() {
+      $scope.loading = false;
+    });
     
     $scope.getTime = function(time) {
       var sHour = time.substring(0, time.indexOf(':'));
