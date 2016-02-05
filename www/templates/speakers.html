@@ -11,7 +11,11 @@
     <ion-list>
       <ion-item ng-repeat="speaker in speakers | orderBy:speaker.name" type="item-text-wrap" class="item" href="#/app/speakers/{{ speaker.$id }}">
         <div class="speaker-avatar"><img ng-src="{{ speaker.image }}"/></div>
-        <p class="title" style="padding-left: 16px;"><strong>{{ speaker.name }}</strong><br />{{ speaker.company }} / {{ speaker.title }}</p>
+        <p class="title" style="padding-left: 16px;">
+          <strong>{{ speaker.name }}</strong><br />
+          {{ speaker.company }}<br />
+          {{ speaker.title }}
+        </p>
       </ion-item>
     </ion-list>
   </ion-content>
