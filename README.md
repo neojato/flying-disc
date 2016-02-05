@@ -68,6 +68,28 @@ Setting up the DevFest App
         ionic plugin add https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git
         ```
 
+    * Add the Ionic User service
+
+        ```bash
+        ionic add ionic-platform-web-client
+        ionic io init
+        ```
+
+    * Add the Ionic Analytics service (only if not including User service above)
+
+        ```bash
+        ionic add ionic-platform-web-client
+        ionic io init
+        ```
+
+    * Add the Ionic Analytics service
+
+        ```bash
+        ionic add ionic-platform-web-client
+        ionic plugin add phonegap-plugin-push
+        ionic io init
+        ```
+
 8. Add desired platforms (NOTE: you can only `add ios` if on a Mac)
 
       ```bash
